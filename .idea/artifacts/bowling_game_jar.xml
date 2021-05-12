@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="bowling_game:jar">
+    <output-path>$PROJECT_DIR$/..</output-path>
+    <root id="archive" name="bowling_game.jar" />
+  </artifact>
+</component>
