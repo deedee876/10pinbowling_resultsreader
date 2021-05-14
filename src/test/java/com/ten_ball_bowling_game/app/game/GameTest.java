@@ -25,7 +25,6 @@ public class GameTest {
         Game game = new Game(gameFactory);
 
         game.roll("4");
-
         Assert.assertEquals(4, game.getTotalScore());
     }
 

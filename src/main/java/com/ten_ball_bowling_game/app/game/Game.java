@@ -65,7 +65,7 @@ public class Game {
     }
 
     public List<FrameSum> getFrameSum() {
-        if(!this.hasGameStarted()) {
+        if(this.hasGameStarted()) {
             return Collections.emptyList();
         }
 
@@ -137,8 +137,6 @@ public class Game {
         }
 
         List<FrameSum> frameSum = this.getFrameSum();
-
-
         return frameSum.size() ==0 ? 0: frameSum.get(frameSum.size() - 1).getTotal();
     }
 

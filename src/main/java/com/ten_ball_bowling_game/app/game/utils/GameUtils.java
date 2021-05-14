@@ -2,6 +2,7 @@ package com.ten_ball_bowling_game.app.game.utils;
 
 import java.text.NumberFormat;
 import java.text.ParsePosition;
+import java.util.Objects;
 
 public class GameUtils {
     private GameUtils() {}
@@ -10,11 +11,11 @@ public class GameUtils {
         boolean isValidNumberRange = isNumeric(playerResult) &&
                 Integer.parseInt(playerResult) >=0 && Integer.parseInt(playerResult)<= 10;
 
-        return isValidNumberRange ||  (!playerResult.equals(null) && playerResult.equals("F"));
+        return isValidNumberRange || (Objects.nonNull(playerResult) && playerResult.equals("F"));
     }
 
     public static boolean isNumeric(String str) {
-        if(str == null) {
+        if(Objects.isNull(str)) {
             return false;
         }
 
@@ -25,7 +26,7 @@ public class GameUtils {
     }
 
     public static int getNumericVersionOfPlay(String play) {
-        if(play.equals(null) || play.equals("") || play.equalsIgnoreCase("F")){
+        if(Objects.isNull(play) || play.equals("") || play.equalsIgnoreCase("F")){
             return 0;
         } else {
             return Integer.parseInt(play);
