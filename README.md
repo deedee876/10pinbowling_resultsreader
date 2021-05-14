@@ -1,1 +1,0 @@
-# 10pinbowling_resultsreader
