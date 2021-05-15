@@ -78,8 +78,6 @@ public class App {
                         IllegalColumnException |
                         IllegalColumnInputException |
                         IllegalAccessException |
-                        InvalidPlayInputException |
-                        InvalidRollAttemptException |
                         InvocationTargetException e
         ) {
             e.printStackTrace();
