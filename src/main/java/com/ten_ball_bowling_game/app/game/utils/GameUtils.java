@@ -7,11 +7,8 @@ import java.util.Objects;
 public class GameUtils {
     private GameUtils() {}
 
-    public static boolean isValidPlayerResult(String playerResult) {
-        boolean isValidNumberRange = isNumeric(playerResult) &&
-                Integer.parseInt(playerResult) >=0 && Integer.parseInt(playerResult)<= 10;
-
-        return isValidNumberRange || (Objects.nonNull(playerResult) && playerResult.equals("F"));
+    public static boolean isValidPlayerResult(String playerResult) throws NumberFormatException {
+        return getNumericVersionOfPlay(playerResult) >= 0 && getNumericVersionOfPlay(playerResult) <= 10;
     }
 
     public static boolean isNumeric(String str) {
@@ -25,7 +22,7 @@ public class GameUtils {
         return str.length() == pos.getIndex();
     }
 
-    public static int getNumericVersionOfPlay(String play) {
+    public static int getNumericVersionOfPlay(String play) throws NumberFormatException{
         if(Objects.isNull(play) || play.equals("") || play.equalsIgnoreCase("F")){
             return 0;
         } else {
