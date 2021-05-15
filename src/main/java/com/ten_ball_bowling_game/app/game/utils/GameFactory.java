@@ -15,16 +15,22 @@ public class GameFactory implements IGameFactory {
      * @return
      */
     private boolean isUserPlayValid(IFrame frame, String play) {
-        if(frame instanceof Frame &&  !frame.isDone()) {
-            int proposedTotal = frame.getScore() + GameUtils.getNumericVersionOfPlay(play);
-            return proposedTotal <= 10;
+        try {
+            if(frame instanceof Frame &&  !frame.isDone()) {
+                int proposedTotal = frame.getScore() + GameUtils.getNumericVersionOfPlay(play);
+                return proposedTotal <= 10;
+            }
+            return GameUtils.isValidPlayerResult(play);
+        } catch (NumberFormatException e) {
+            return false;
         }
-        return GameUtils.isValidPlayerResult(play);
     }
 
     @Override
     public IFrame generateFrameForGame(boolean atLastFrame, int nextFrameIndex, IFrame currentFrame, String play)
             throws InvalidPlayInputException {
+
+
         if(!isUserPlayValid(currentFrame, play)) {
             throw new InvalidPlayInputException();
         }
