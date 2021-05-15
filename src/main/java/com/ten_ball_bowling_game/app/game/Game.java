@@ -65,7 +65,7 @@ public class Game {
     }
 
     public List<FrameSum> getFrameSum() {
-        if(this.hasGameStarted()) {
+        if(!this.hasGameStarted()) {
             return Collections.emptyList();
         }
 
@@ -120,7 +120,7 @@ public class Game {
             int nextPlayOne = GameUtils.getNumericVersionOfPlay(this.frames[index ].getPlayAt(1));
             int nextPlayTwo = GameUtils.getNumericVersionOfPlay(this.frames[index ].getPlayAt(2));
 
-            return strikeCount > 0 ? strikeBonus + nextPlayOne : strikeBonus + nextPlayOne + nextPlayTwo;
+            return strikeCount > 1 ? strikeBonus + nextPlayOne : strikeBonus + nextPlayOne + nextPlayTwo;
         }
 
         if(strikeCount == 2 && frame.isStrikePlay()) {
@@ -137,7 +137,7 @@ public class Game {
         }
 
         List<FrameSum> frameSum = this.getFrameSum();
-        return frameSum.size() ==0 ? 0: frameSum.get(frameSum.size() - 1).getTotal();
+        return frameSum.size() == 0 ? 0: frameSum.get(frameSum.size() - 1).getTotal();
     }
 
     public boolean hasGameStarted() {
