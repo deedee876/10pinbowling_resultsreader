@@ -12,7 +12,7 @@ public class FrameWithBonus extends IFrame {
     }
 
     public FrameWithBonus(IFrame frame, String addPlayOne, String addPlayTwo){
-        super(addPlayOne, addPlayOne);
+        super(addPlayOne, addPlayTwo);
         this.originalGame = frame;
     }
 
@@ -34,6 +34,11 @@ public class FrameWithBonus extends IFrame {
         String[] originalGameList = this.originalGame.getPlays();
         String[] superList = super.getPlays();
 
+        if(this.originalGame.isStrikePlay()) {
+            originalGameList = Arrays.stream(originalGameList)
+                    .filter(stackPlay -> Objects.nonNull(stackPlay)).toArray(String[]::new);
+        }
+
         int fal = originalGameList.length;
         int sal = superList.length;
 
@@ -41,7 +46,6 @@ public class FrameWithBonus extends IFrame {
 
         System.arraycopy(originalGameList, 0, newList, 0, fal);
         System.arraycopy(superList, 0, newList, fal, sal);
-
         return newList;
     }
 
@@ -56,14 +60,20 @@ public class FrameWithBonus extends IFrame {
 
     @Override
     public String getPlayAt(int index) {
-        int originalPlaySize = this.originalGame.getPlays().length;
+        String[] originalPlays = this.originalGame.getPlays();
 
-        if(index <= originalPlaySize) {
-            return this.originalGame.getPlayAt(index - 1);
+        if(this.originalGame.isStrikePlay()) {
+            originalPlays = Arrays.stream(this.originalGame.getPlays())
+                    .filter(stackPlay -> Objects.nonNull(stackPlay)).toArray(String[]::new);
         }
 
+        int originalPlaySize = originalPlays.length;
+
+        if(index <= originalPlaySize) {
+            return originalPlays[index - 1];
+        }
         int newIndex = index - originalPlaySize;
-        return super.getPlays()[newIndex];
+        return super.getPlays()[newIndex - 1];
     }
 
     @Override
