@@ -2,6 +2,7 @@ package com.ten_ball_bowling_game.app.interfaces;
 
 import com.ten_ball_bowling_game.app.exception.InvalidPlayInputException;
 import com.ten_ball_bowling_game.app.exception.InvalidRollAttemptException;
+import com.ten_ball_bowling_game.app.frame.IFrame;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -18,5 +19,5 @@ public interface IGameFactory {
      * @throws InvalidPlayInputException
      * @throws InvalidRollAttemptException
      */
-    IFrame generateFrameForGame(boolean isLastFrame, int nextFrameIndex,  IFrame frame, String play) throws InvocationTargetException, IllegalAccessException, InvalidPlayInputException, InvalidRollAttemptException;
+    IFrame generateFrameForGame(boolean isLastFrame, int nextFrameIndex, IFrame frame, String play) throws InvocationTargetException, IllegalAccessException, InvalidPlayInputException, InvalidRollAttemptException;
 }

@@ -3,8 +3,10 @@ package com.ten_ball_bowling_game.app.game.utils;
 import com.ten_ball_bowling_game.app.exception.InvalidPlayInputException;
 import com.ten_ball_bowling_game.app.frame.Frame;
 import com.ten_ball_bowling_game.app.frame.FrameWithBonus;
-import com.ten_ball_bowling_game.app.interfaces.IFrame;
+import com.ten_ball_bowling_game.app.frame.IFrame;
 import com.ten_ball_bowling_game.app.interfaces.IGameFactory;
+
+import java.util.Arrays;
 
 public class GameFactory implements IGameFactory {
 
@@ -18,7 +20,7 @@ public class GameFactory implements IGameFactory {
         try {
             if(frame instanceof Frame &&  !frame.isDone()) {
                 int proposedTotal = frame.getScore() + GameUtils.getNumericVersionOfPlay(play);
-                return proposedTotal <= 10;
+                return proposedTotal >= 0 && proposedTotal <= 10;
             }
             return GameUtils.isValidPlayerResult(play);
         } catch (NumberFormatException e) {
@@ -29,7 +31,6 @@ public class GameFactory implements IGameFactory {
     @Override
     public IFrame generateFrameForGame(boolean atLastFrame, int nextFrameIndex, IFrame currentFrame, String play)
             throws InvalidPlayInputException {
-
 
         if(!isUserPlayValid(currentFrame, play)) {
             throw new InvalidPlayInputException();
@@ -83,16 +84,16 @@ public class GameFactory implements IGameFactory {
     private Frame generateFrame(IFrame frame, String play){
         if(frame != null && !frame.isDone()) {
             Frame newFrame = new Frame();
-            frame.getPlays().forEach(currentPlay -> newFrame.setPlay(currentPlay));
+            Arrays.stream(frame.getPlays()).forEach(currentPlay -> {
+                newFrame.setPlay(currentPlay);
+            });
             newFrame.setPlay(play);
-
             return newFrame;
         }
 
         if(GameUtils.getNumericVersionOfPlay(play) == 10){
             return new Frame("10",null);
         }
-
         return new Frame(play, null);
     }
 }

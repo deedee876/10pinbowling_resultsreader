@@ -1,6 +1,6 @@
 package com.ten_ball_bowling_game.app.scoreboard;
 
-import com.ten_ball_bowling_game.app.interfaces.IFrame;
+import com.ten_ball_bowling_game.app.frame.IFrame;
 
 public class FrameSum {
     private int frameCounter;

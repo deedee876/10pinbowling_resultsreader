@@ -2,7 +2,7 @@ package com.ten_ball_bowling_game.app.scoreboard;
 
 import com.ten_ball_bowling_game.app.frame.FrameWithBonus;
 import com.ten_ball_bowling_game.app.game.Game;
-import com.ten_ball_bowling_game.app.interfaces.IFrame;
+import com.ten_ball_bowling_game.app.frame.IFrame;
 import com.ten_ball_bowling_game.app.interfaces.IScoreboard;
 
 import java.util.*;

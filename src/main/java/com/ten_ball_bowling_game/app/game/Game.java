@@ -4,7 +4,7 @@ import com.ten_ball_bowling_game.app.game.utils.GameUtils;
 import com.ten_ball_bowling_game.app.scoreboard.FrameSum;
 import com.ten_ball_bowling_game.app.exception.InvalidPlayInputException;
 import com.ten_ball_bowling_game.app.exception.InvalidRollAttemptException;
-import com.ten_ball_bowling_game.app.interfaces.IFrame;
+import com.ten_ball_bowling_game.app.frame.IFrame;
 import com.ten_ball_bowling_game.app.interfaces.IGameFactory;
 
 import java.lang.reflect.InvocationTargetException;
@@ -49,7 +49,8 @@ public class Game {
 
             this.frames[ this.gameTracker - 1 ] = frame;
         }catch(InvalidPlayInputException e) {
-            System.err.println("Invalid Play");
+
+            System.err.println("Exception Thrown: " + e.getMessage());
         } catch (InvalidRollAttemptException e) {
             System.err.println("Invalid Roll");
         }
