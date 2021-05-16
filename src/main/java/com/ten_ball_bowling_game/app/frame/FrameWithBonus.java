@@ -1,9 +1,7 @@
 package com.ten_ball_bowling_game.app.frame;
 
-import com.ten_ball_bowling_game.app.interfaces.IFrame;
-
+import java.util.Arrays;
 import java.util.Objects;
-import java.util.Stack;
 
 public class FrameWithBonus extends IFrame {
     private IFrame originalGame;
@@ -18,7 +16,7 @@ public class FrameWithBonus extends IFrame {
         this.originalGame = frame;
     }
 
-    public FrameWithBonus(IFrame originalGame, Stack<String> bonusPlays) {
+    public FrameWithBonus(IFrame originalGame, String[] bonusPlays) {
         super(bonusPlays);
         this.originalGame = originalGame;
     }
@@ -27,20 +25,23 @@ public class FrameWithBonus extends IFrame {
         return this.originalGame;
     }
 
-    public Stack<String> getBonusPlays() {
+    public String[] getBonusPlays() {
         return super.getPlays();
     }
 
     @Override
-    public Stack<String> getPlays() {
-        Stack<String> originalGameList = this.originalGame.getPlays();
-        Stack<String> superList = super.getPlays();
+    public String[] getPlays() {
+        String[] originalGameList = this.originalGame.getPlays();
+        String[] superList = super.getPlays();
 
-        Stack<String> newList = new Stack<>();
+        int fal = originalGameList.length;
+        int sal = superList.length;
 
-        newList.addAll(originalGameList);
-        newList.addAll(superList);
-        newList.removeIf(Objects::isNull);
+        String[] newList = new String[fal + sal];
+
+        System.arraycopy(originalGameList, 0, newList, 0, fal);
+        System.arraycopy(superList, 0, newList, fal, sal);
+
         return newList;
     }
 
@@ -55,19 +56,19 @@ public class FrameWithBonus extends IFrame {
 
     @Override
     public String getPlayAt(int index) {
-        int originalPlaySize = this.originalGame.getPlays().size();
+        int originalPlaySize = this.originalGame.getPlays().length;
 
         if(index <= originalPlaySize) {
             return this.originalGame.getPlayAt(index - 1);
         }
 
         int newIndex = index - originalPlaySize;
-        return super.getPlays().get(newIndex);
+        return super.getPlays()[newIndex];
     }
 
     @Override
     public boolean isDone() {
-        boolean isBonusFilled = this.getPlays().stream().noneMatch(play -> play == null || play == "");
+        boolean isBonusFilled = Arrays.stream(this.getPlays()).noneMatch(play ->Objects.isNull(play) || play.equals(""));
         return this.originalGame.isDone() && isBonusFilled ;
     }
 

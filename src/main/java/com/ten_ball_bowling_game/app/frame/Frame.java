@@ -1,7 +1,6 @@
 package com.ten_ball_bowling_game.app.frame;
 
 import com.ten_ball_bowling_game.app.game.utils.GameUtils;
-import com.ten_ball_bowling_game.app.interfaces.IFrame;
 
 public class Frame extends IFrame {
     public Frame() {
@@ -14,7 +13,7 @@ public class Frame extends IFrame {
 
     @Override
     public String getPlayAt(int index) {
-        return this.getPlays().get(index - 1);
+        return this.getPlays()[index - 1];
     }
 
     @Override
@@ -24,6 +23,7 @@ public class Frame extends IFrame {
 
     @Override
     public boolean isStrikePlay() {
-        return GameUtils.isNumeric(this.getPlayAt(1)) && GameUtils.getNumericVersionOfPlay(this.getPlayAt(1)) == 10;
+        return GameUtils.isNumeric(this.getPlayAt(1)) &&
+                GameUtils.getNumericVersionOfPlay(this.getPlayAt(1)) == 10;
     }
 }

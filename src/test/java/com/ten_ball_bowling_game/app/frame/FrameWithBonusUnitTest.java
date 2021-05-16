@@ -12,7 +12,7 @@ public class FrameWithBonusUnitTest {
         Frame frame = new Frame("10", "0");
 
         FrameWithBonus frameWithBonus = new FrameWithBonus(frame, "6");
-        Assert.assertEquals(3, frameWithBonus.getPlays().size());
+        Assert.assertEquals(3, frameWithBonus.getPlays().length);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class FrameWithBonusUnitTest {
         Frame frame = new Frame("10", "0");
 
         FrameWithBonus frameWithBonus = new FrameWithBonus(frame, "6","4");
-        Assert.assertEquals(4, frameWithBonus.getPlays().size());
+        Assert.assertEquals(4, frameWithBonus.getPlays().length);
     }
 
     @Test
@@ -28,7 +28,7 @@ public class FrameWithBonusUnitTest {
         Frame frame = new Frame("5", "5");
 
         FrameWithBonus frameWithBonus = new FrameWithBonus(frame, "6");
-        Assert.assertEquals(3, frameWithBonus.getPlays().size());
+        Assert.assertEquals(3, frameWithBonus.getPlays().length);
     }
 
     @Test
@@ -36,6 +36,6 @@ public class FrameWithBonusUnitTest {
         Frame frame = new Frame("5", "5");
 
         FrameWithBonus frameWithBonus = new FrameWithBonus(frame, "6","5");
-        Assert.assertEquals(4, frameWithBonus.getPlays().size());
+        Assert.assertEquals(4, frameWithBonus.getPlays().length);
     }
 }

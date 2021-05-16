@@ -1,46 +1,41 @@
-package com.ten_ball_bowling_game.app.interfaces;
+package com.ten_ball_bowling_game.app.frame;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Stack;
+import java.util.*;
 
 public abstract class IFrame {
-    private Stack<String> playStack;
+    private String[] playStack;
 
     /**
      * Constructor that sets the array of plays
      * @param playsList list of plays done by player
      */
-    public IFrame(String...playsList){
-        this.playStack = new Stack<String>();
-        this.playStack.addAll(Arrays.asList(playsList));
-    }
-
-    public IFrame(Stack<String> playStack){
-        this.playStack = playStack;
+    protected IFrame(String...playsList) {
+        this.playStack = playsList;
     }
 
     /**
      * Get list of plays ordered by the time executed
      * @return string array with play listing
      */
-    public Stack<String> getPlays() {
+    public String[] getPlays() {
         return this.playStack;
     }
 
     public void setPlay(String play) {
-        this.playStack.removeAll(Collections.singleton(null));
-        this.playStack.push(play);
-    }
+        String[] newStack = Arrays.stream(this.playStack).filter(stackPlay -> Objects.nonNull(stackPlay)).toArray(String[]::new);
 
+        if(newStack.length != this.playStack.length) {
+            this.playStack[newStack.length] = play;
+        }
+    }
     /**
      * Get the total score for the frame without external modifications
      * @return score as integer
      */
     public int getScore() {
-        return this.getPlays().stream()
+        return Arrays.stream(this.playStack)
                 .map(play -> {
-                    if(play == null || play.equalsIgnoreCase("F")) {
+                    if(Objects.isNull(play) ||  play.equalsIgnoreCase("F")) {
                         return 0;
                     } else {
                         return Integer.parseInt(play);
@@ -61,8 +56,8 @@ public abstract class IFrame {
      * @return boolean check based on if the frame is complete
      */
     public boolean isDone() {
-        boolean noNullValues = this.getPlays().stream().noneMatch(play -> play == null || play == "");
-        return this.getPlays().size() > 0  && (noNullValues || isStrikePlay());
+        boolean noNullValues =  Arrays.stream(this.playStack).noneMatch(play -> Objects.isNull(play) || play.equals(""));
+        return noNullValues || isStrikePlay();
     }
 
     /**
