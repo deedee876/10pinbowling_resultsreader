@@ -12,7 +12,6 @@ public class GameUtils {
     }
 
     public static boolean isValidPlayerResult(String playerResult)  {
-        System.out.println("Result: "+playerResult + " .Result: " + (getNumericVersionOfPlay(playerResult)));
         return getNumericVersionOfPlay(playerResult) >= 0 && getNumericVersionOfPlay(playerResult) <= 10;
     }
 

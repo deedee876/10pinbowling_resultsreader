@@ -37,9 +37,8 @@ public class App {
             }
         }
 
-        System.out.println("Enter column separator eg (default: tab-separator -> '\\s') below =>");
-
         String colSep = fileDetailsScanner.nextLine();
+
         columnSeparator = colSep == null ? columnSeparator : colSep;
         fileData.put("column_separator", columnSeparator);
 
