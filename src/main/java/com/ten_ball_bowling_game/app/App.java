@@ -23,15 +23,24 @@ public class App {
         Map<String, String> fileData = new HashMap<>();
 
         String columnSeparator ="\\s";
-
         Scanner fileDetailsScanner = new Scanner(System.in);
-        System.out.println("Enter file: ");
 
+        while(Objects.isNull(fileData.get("filename"))|| fileData.get("filename").equals("")) {
+            System.out.println("Enter file path below =>");
+            String file = fileDetailsScanner.nextLine();
 
-        String file = fileDetailsScanner.nextLine();  // Read user input
-        fileData.put("filename", file);
+            File f = new File(file);
 
-        System.out.println("Enter column separator eg (default: '\\s') : ");
+            if (f.exists())
+                fileData.put("filename", file.trim());
+            else {
+                fileData.put("filename", null);
+                System.out.println("File path invalid...");
+            }
+        }
+
+        System.out.println("Enter column separator eg (default: tab-separator -> '\\s') below =>");
+
         String colSep = fileDetailsScanner.nextLine();
         columnSeparator = colSep == null ? columnSeparator : colSep;
         fileData.put("column_separator", columnSeparator);
@@ -52,6 +61,7 @@ public class App {
 
             while ((sCurrentLine = br.readLine()) != null) {
                 List<String> columns = new ArrayList<>(Arrays.asList(sCurrentLine.split(columnSeparator)));
+
                 if(columns.size() != 2){
                     throw new IllegalColumnException();
                 }
@@ -74,11 +84,8 @@ public class App {
             System.out.println(scoreboard.getScoreBoardForGame(playerData));
         }
         catch (
-                IOException |
-                        IllegalColumnException |
-                        IllegalColumnInputException |
-                        IllegalAccessException |
-                        InvocationTargetException e
+                IOException | IllegalColumnException | IllegalColumnInputException |
+                        IllegalAccessException | InvocationTargetException e
         ) {
             e.printStackTrace();
         }
