@@ -1,7 +1,6 @@
 package com.ten_ball_bowling_game.app.game;
 
 import com.ten_ball_bowling_game.app.exception.InvalidPlayInputException;
-import com.ten_ball_bowling_game.app.exception.InvalidRollAttemptException;
 import com.ten_ball_bowling_game.app.game.utils.GameFactory;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,7 +9,6 @@ import org.mockito.Mock;
 import java.lang.reflect.InvocationTargetException;
 
 public class GameTest {
-    @Mock
     private GameFactory gameFactory;
 
     @Test
@@ -41,7 +39,7 @@ public class GameTest {
         Game game = new Game(innerGameFactory);
 
         game.roll("3");
-        game.roll("9");
+        game.roll("7");
         game.roll("F");
 
         Assert.assertEquals(2, game.getFrameSum().size());
