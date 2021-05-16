@@ -59,8 +59,8 @@ public class Scoreboard implements IScoreboard {
 
                 frameStr = frameStr + String.format("%s%s\t%s\t%s",
                         starting, iFrame.isStrikePlay() ? "X" : iFrame.getPlayAt(1),
-                        iFrame.isSparePlay() ? "/" :  iFrame.getPlayAt(1),
-                        iFrame.getPlayAt(2));
+                        iFrame.isSparePlay() ? "/" :  iFrame.getPlayAt(2),
+                        iFrame.getPlayAt(3));
             } else {
                 if(iFrame.isStrikePlay()){
                     String starting = index.get() == 0 ? "\t" : " \t\t";

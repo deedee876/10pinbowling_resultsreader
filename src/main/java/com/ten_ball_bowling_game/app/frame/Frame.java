@@ -13,6 +13,9 @@ public class Frame extends IFrame {
 
     @Override
     public String getPlayAt(int index) {
+        if(index == 0 ){
+            return this.getPlays()[0];
+        }
         return this.getPlays()[index - 1];
     }
 
