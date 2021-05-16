@@ -2,8 +2,6 @@ package com.ten_ball_bowling_game.app;
 
 import com.ten_ball_bowling_game.app.exception.IllegalColumnException;
 import com.ten_ball_bowling_game.app.exception.IllegalColumnInputException;
-import com.ten_ball_bowling_game.app.exception.InvalidPlayInputException;
-import com.ten_ball_bowling_game.app.exception.InvalidRollAttemptException;
 import com.ten_ball_bowling_game.app.game.Game;
 import com.ten_ball_bowling_game.app.game.utils.GameFactory;
 import com.ten_ball_bowling_game.app.game.utils.GameUtils;
