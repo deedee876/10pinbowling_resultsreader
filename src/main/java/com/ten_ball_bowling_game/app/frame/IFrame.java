@@ -33,7 +33,7 @@ public abstract class IFrame {
      * @return score as integer
      */
     public int getScore() {
-        return Arrays.stream(this.playStack)
+        return Arrays.stream(this.getPlays())
                 .map(play -> {
                     if(Objects.isNull(play) ||  play.equalsIgnoreCase("F")) {
                         return 0;
