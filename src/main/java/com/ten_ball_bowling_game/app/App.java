@@ -2,6 +2,7 @@ package com.ten_ball_bowling_game.app;
 
 import com.ten_ball_bowling_game.app.exception.IllegalColumnException;
 import com.ten_ball_bowling_game.app.exception.IllegalColumnInputException;
+import com.ten_ball_bowling_game.app.exception.IllegalFileException;
 import com.ten_ball_bowling_game.app.game.Game;
 import com.ten_ball_bowling_game.app.game.utils.GameFactory;
 import com.ten_ball_bowling_game.app.game.utils.GameUtils;
@@ -17,7 +18,7 @@ import java.util.*;
  *
  */
 public class App {
-    private static Map<String, String> getFileAndSeparatorFromUser() {
+    private static Map<String, String> getFileAndSeparatorFromUser() throws IllegalFileException {
         Map<String, String> fileData = new HashMap<>();
 
         String columnSeparator ="%s";
@@ -32,6 +33,9 @@ public class App {
             if (f.exists())
                 fileData.put("filename", file.trim());
             else {
+                if(!f.canRead() || f.length() == Long.valueOf(0)) {
+                    throw new IllegalFileException();
+                }
                 fileData.put("filename", null);
                 System.out.println("File path invalid...");
             }
@@ -46,7 +50,7 @@ public class App {
         return fileData;
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws IllegalFileException {
         Map<String, Game> playerData = new HashMap<>();
         GameFactory gameFactory = new GameFactory();
         Map<String, String> fileSeparatorMap = getFileAndSeparatorFromUser();
