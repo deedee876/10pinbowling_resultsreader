@@ -46,14 +46,7 @@ public class GameFactory implements IGameFactory {
 
                 return frame;
             } else {
-//                System.out.println("Play Value: " + play);
-//
-//                System.out.println("B4 Play: " + Arrays.toString(currentFrame.getPlays()));
-
                 FrameWithBonus frameWithBonus = this.generateBonus(currentFrame, play);
-
-                System.out.println("Play: " + Arrays.toString(frameWithBonus.getPlays()));
-
                 return frameWithBonus == null ? generateFrame(currentFrame, play): frameWithBonus;
             }
         }
@@ -66,17 +59,14 @@ public class GameFactory implements IGameFactory {
             Frame frame = generateFrame(currentFrame, play);
 
             if(frame.isStrikePlay()) {
-                return new FrameWithBonus(currentFrame, null, null);
+                return new FrameWithBonus(frame, null, null);
             } else if(frame.isSparePlay()) {
-                return new FrameWithBonus(currentFrame, (String) null);
+                return new FrameWithBonus(frame, (String) null);
             }
-
         } else if(currentFrame instanceof FrameWithBonus && !currentFrame.isDone()) {
-            FrameWithBonus frameWithBonus =
-                    new FrameWithBonus(
+            FrameWithBonus frameWithBonus = new FrameWithBonus(
                             ((FrameWithBonus) currentFrame).getOriginalGame(),
-                            ((FrameWithBonus) currentFrame).getBonusPlays()
-                    );
+                            ((FrameWithBonus) currentFrame).getBonusPlays());
 
             frameWithBonus.setPlay(play);
             return frameWithBonus;
@@ -95,6 +85,8 @@ public class GameFactory implements IGameFactory {
             Frame newFrame = new Frame();
             Arrays.stream(frame.getPlays()).forEach(currentPlay -> newFrame.setPlay(currentPlay));
             newFrame.setPlay(play);
+
+            System.out.println("Frame: " + Arrays.toString(newFrame.getPlays()));
             return newFrame;
         }
 

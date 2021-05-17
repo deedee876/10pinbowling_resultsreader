@@ -52,7 +52,7 @@ public class GameTest {
 
         game.roll("3");
         game.roll("9");
-        game.roll("F");
+//        game.roll("F");
     }
 
     @Test
