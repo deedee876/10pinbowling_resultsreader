@@ -1,5 +1,8 @@
-<<<<<<< HEAD
+
 # Ten(10) Pin Bowling Results Reader & Scoreboard
+
+## Project Details
+The project takes as input a file, reads the content and outputs the scoreboard per players
 
 ## Setup the project
 
@@ -19,6 +22,4 @@
 5. Enter the expected column separator for the file entered in step 4. The default is space separated.
 
 ## Running the jar version of the project
-=======
-# 10pinbowling_resultsreader
->>>>>>> 6788c04e1e75c5c810e4ee0b655564195e98a173
+
