@@ -85,14 +85,12 @@ public class Game {
 
                     if(frame.isSparePlay()) {
                         score = score + getSpareBonus(index);
-                    } else if(frame.isStrikePlay()){
+                    } else if(frame.isStrikePlay() && index != startedOrCompletedFramesCnt){
                         score = score + getStrikeBonus(index);
                     }
 
                     FrameSum frameSum = new FrameSum(index + 1, frame, score);
                     listOfFrameAndSum.add(frameSum);
-
-                    System.out.printf("%s => %s%n", frameSum.getFrame().getPlays(), score);
                 });
 
         return listOfFrameAndSum;
@@ -119,13 +117,25 @@ public class Game {
         IFrame frame = this.frames[index];
         if(!frame.isStrikePlay()){
             int nextPlayOne = GameUtils.getNumericVersionOfPlay(this.frames[index ].getPlayAt(1));
+            if(strikeCount == 2 ){
+                return strikeBonus + nextPlayOne;
+            } else if(index == (this.frames.length - 1)) {
+                int nextPlayTwo = GameUtils.getNumericVersionOfPlay(this.frames[index ].getPlayAt(2));
+                return strikeBonus + nextPlayOne + nextPlayTwo;
+            }
+            return strikeBonus + frame.getScore();
+        } else if(frame.isStrikePlay() && index == (this.frames.length - 1) ) {
+            int nextPlayOne = GameUtils.getNumericVersionOfPlay(this.frames[index ].getPlayAt(1));
             int nextPlayTwo = GameUtils.getNumericVersionOfPlay(this.frames[index ].getPlayAt(2));
-
-            return strikeCount > 1 ? strikeBonus + nextPlayOne : strikeBonus + nextPlayOne + nextPlayTwo;
+            if(strikeCount == 2) {
+                return strikeBonus + nextPlayOne ;
+            }
+           return strikeBonus + nextPlayOne + nextPlayTwo;
         }
 
-        if(strikeCount == 2 && frame.isStrikePlay()) {
-            return strikeBonus + frame.getScore();
+        if(strikeCount == 2) {
+            int nextPlayOne = GameUtils.getNumericVersionOfPlay(this.frames[index ].getPlayAt(1));
+            return strikeBonus +nextPlayOne;
         }
 
         strikeBonus += frame.getScore();
@@ -138,7 +148,7 @@ public class Game {
         }
 
         List<FrameSum> frameSum = this.getFrameSum();
-        return frameSum.size() == 0 ? 0: frameSum.get(frameSum.size() - 1).getTotal();
+        return frameSum.isEmpty() ? 0: frameSum.get(frameSum.size() - 1).getTotal();
     }
 
     public boolean hasGameStarted() {
