@@ -83,7 +83,7 @@ public class Game {
 
                     int score = previousScore + frame.getScore();
 
-                    if(frame.isSparePlay()) {
+                    if(frame.isSparePlay()  && index != startedOrCompletedFramesCnt) {
                         score = score + getSpareBonus(index);
                     } else if(frame.isStrikePlay() && index != startedOrCompletedFramesCnt){
                         score = score + getStrikeBonus(index);
@@ -97,6 +97,9 @@ public class Game {
     }
 
     public int getSpareBonus(int index){
+        if((index + 1) >= this.frames.length) {
+            return 0;
+        }
         IFrame frame = this.frames[index + 1];
         return GameUtils.getNumericVersionOfPlay(frame.getPlayAt(1));
     }

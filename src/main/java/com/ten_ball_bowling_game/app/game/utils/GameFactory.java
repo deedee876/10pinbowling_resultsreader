@@ -46,7 +46,14 @@ public class GameFactory implements IGameFactory {
 
                 return frame;
             } else {
+//                System.out.println("Play Value: " + play);
+//
+//                System.out.println("B4 Play: " + Arrays.toString(currentFrame.getPlays()));
+
                 FrameWithBonus frameWithBonus = this.generateBonus(currentFrame, play);
+
+                System.out.println("Play: " + Arrays.toString(frameWithBonus.getPlays()));
+
                 return frameWithBonus == null ? generateFrame(currentFrame, play): frameWithBonus;
             }
         }
@@ -59,6 +66,8 @@ public class GameFactory implements IGameFactory {
             Frame frame = generateFrame(currentFrame, play);
 
             if(frame.isStrikePlay()) {
+                return new FrameWithBonus(currentFrame, null, null);
+            } else if(frame.isSparePlay()) {
                 return new FrameWithBonus(currentFrame, (String) null);
             }
 
@@ -84,9 +93,7 @@ public class GameFactory implements IGameFactory {
     private Frame generateFrame(IFrame frame, String play){
         if(frame != null && !frame.isDone()) {
             Frame newFrame = new Frame();
-            Arrays.stream(frame.getPlays()).forEach(currentPlay -> {
-                newFrame.setPlay(currentPlay);
-            });
+            Arrays.stream(frame.getPlays()).forEach(currentPlay -> newFrame.setPlay(currentPlay));
             newFrame.setPlay(play);
             return newFrame;
         }

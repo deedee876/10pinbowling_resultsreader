@@ -8,6 +8,7 @@ public class FrameWithBonus extends IFrame {
 
     public FrameWithBonus(IFrame frame, String additionalPlay) {
         super(additionalPlay);
+        System.out.println("Frame: " + Arrays.toString(frame.getPlays()));
         this.originalGame = frame;
     }
 
@@ -32,6 +33,7 @@ public class FrameWithBonus extends IFrame {
     @Override
     public String[] getPlays() {
         String[] originalGameList = this.originalGame.getPlays();
+        System.out.println("In Obj List (Org.) " +  Arrays.toString(originalGameList));
         String[] superList = super.getPlays();
 
         if(this.originalGame.isStrikePlay()) {

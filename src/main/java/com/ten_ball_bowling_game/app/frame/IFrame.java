@@ -10,6 +10,7 @@ public abstract class IFrame {
      * @param playsList list of plays done by player
      */
     protected IFrame(String...playsList) {
+
         this.playStack = playsList;
     }
 
@@ -35,6 +36,7 @@ public abstract class IFrame {
     public int getScore() {
         return Arrays.stream(this.getPlays())
                 .map(play -> {
+//                    System.out.println(Arrays.toString(this.getPlays()) + " . Score: " + play);
                     if(Objects.isNull(play) ||  play.equalsIgnoreCase("F")) {
                         return 0;
                     } else {
