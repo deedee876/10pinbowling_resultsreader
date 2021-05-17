@@ -2,6 +2,8 @@ package com.ten_ball_bowling_game.app.frame;
 
 import com.ten_ball_bowling_game.app.game.utils.GameUtils;
 
+import java.util.Arrays;
+
 public class Frame extends IFrame {
     public Frame() {
         super(null, null);
