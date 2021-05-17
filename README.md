@@ -1,6 +1,9 @@
 
 # Ten(10) Pin Bowling Results Reader & Scoreboard
 
+## Project Details
+The project takes as input a file, reads the content and outputs the scoreboard per players
+
 ## Setup the project
 
 1. cd to your project root folder in command line.
@@ -19,3 +22,4 @@
 5. Enter the expected column separator for the file entered in step 4. The default is space separated.
 
 ## Running the jar version of the project
+
