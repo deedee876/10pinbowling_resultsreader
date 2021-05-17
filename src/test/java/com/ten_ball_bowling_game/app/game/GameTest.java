@@ -70,7 +70,7 @@ public class GameTest {
     }
 
     @Test
-    public void testCalculateFullGame() throws InvocationTargetException, IllegalAccessException {
+    public void testCalculateFullGameWithStrikeBonusRound() throws InvocationTargetException, IllegalAccessException {
         GameFactory factory = new GameFactory();
         Game game =  new Game(factory);
 
@@ -93,7 +93,68 @@ public class GameTest {
         game.roll("1");
 
         Assert.assertEquals(167, game.getTotalScore());
+    }
 
+    @Test
+    public void testCalculateFullGameWithNoBonusRound() throws InvocationTargetException, IllegalAccessException {
+        GameFactory factory = new GameFactory();
+        Game game =  new Game(factory);
+
+        game.roll("10");
+        game.roll("7");
+        game.roll("3");
+        game.roll("9");
+        game.roll("0");
+        game.roll("10");
+        game.roll("0");
+        game.roll("8");
+        game.roll("8");
+        game.roll("2");
+        game.roll("F");
+        game.roll("6");
+        game.roll("10");
+        game.roll("7");
+        game.roll("3");
+        game.roll("8");
+        game.roll("1");
+
+        Assert.assertEquals(137, game.getTotalScore());
+    }
+
+    @Test
+    public void testCalculateFullGameWithSpareBonusRound() throws InvocationTargetException, IllegalAccessException {
+        GameFactory factory = new GameFactory();
+        Game game =  new Game(factory);
+
+        game.roll("10");
+
+        game.roll("7");
+        game.roll("3");
+
+        game.roll("9");
+        game.roll("0");
+
+        game.roll("10");
+
+        game.roll("0");
+        game.roll("8");
+
+        game.roll("8");
+        game.roll("2");
+
+        game.roll("F");
+        game.roll("6");
+
+        game.roll("10");
+
+        game.roll("7");
+        game.roll("3");
+
+        game.roll("8");
+        game.roll("2");
+        game.roll("10");
+
+        Assert.assertEquals(148, game.getTotalScore());
     }
 
     @Test
