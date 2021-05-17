@@ -20,12 +20,12 @@ public class App {
     private static Map<String, String> getFileAndSeparatorFromUser() {
         Map<String, String> fileData = new HashMap<>();
 
-        String columnSeparator ="\\s";
+        String columnSeparator ="%s";
         Scanner fileDetailsScanner = new Scanner(System.in);
 
         while(Objects.isNull(fileData.get("filename"))|| fileData.get("filename").equals("")) {
-            System.out.println("Enter file path below =>");
-            String file = fileDetailsScanner.nextLine();
+            System.out.print("Enter file path below => : ");
+            String file = fileDetailsScanner.next();
 
             File f = new File(file);
 
@@ -37,7 +37,8 @@ public class App {
             }
         }
 
-        String colSep = fileDetailsScanner.nextLine();
+        System.out.print("Enter column separator (Default is space separated) => : ");
+        String colSep = fileDetailsScanner.next  ();
 
         columnSeparator = colSep == null ? columnSeparator : colSep;
         fileData.put("column_separator", columnSeparator);
